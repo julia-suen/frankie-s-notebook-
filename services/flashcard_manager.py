@@ -1,4 +1,3 @@
-import storage
 from models.flashcard import Flashcard
 
 class FlashcardManager:
@@ -7,6 +6,7 @@ class FlashcardManager:
 
     def __init__(self, data, storage):
         self.data = data 
+        self.storage = storage
         self.flashcards = data["flashcards"] #mutable with data in main 
         self.storage = storage 
         
