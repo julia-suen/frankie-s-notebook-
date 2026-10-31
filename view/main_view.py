@@ -1,100 +1,128 @@
-"""TODO: Module Description Here"""
+# """TODO: Module Description Here"""
+#
+# import tkinter as tk
+# from tkinter import ttk, simpledialog, messagebox
+#
+# from view.collection_view import Collection # TODO
+# # from view.study_view import Study # TODO
+#
+# class Main(tk.Tk):
+#     """TODO"""
+#     def __init__(self) -> None:
+#         super().__init__()
+#
+#         self.title("Frankie's Notebook")
+#         self.geometry("800x600")
+#         self.minsize(400, 300)
+#
+#         self.flashcard_manager = flashcard_manager
+#         self.collection_manager = collection_manager
+#         self.study_manager = study_manager
+#
+#         self.container = ttk.Frame(self, padding=20)
+#         self.container.pack(fill="both", expand=True)
+#
+#         self.show_home()
+#
+#     def show_screen(self, screen, *args):
+#         for widget in self.container.winfo_children():
+#             widget.destroy()
+#         screen(self.container, self, *args).pack(fill="both", expand=True)
+#
+#     def show_home(self):
+#         for widget in self.container.winfo_children():
+#             widget.destroy()
+#         ttk.Label(self.container, text="My Library", font=("Arial", 22)).pack(pady=15)
+#         ttk.Button(self.container, text="All Flashcards",
+#                    command=lambda: self.show_collection(None)).pack(pady=5)
+#         for collection in self.collection_manager.get_all_collections():
+#             ttk.Button(self.container, text=collection.name,
+#                        command=lambda cid=collection.id: self.show_collection(cid)).pack(pady=5)
+#         ttk.Button(self.container, text="+ New Collection",
+#                    command=self.new_collection).pack(pady=15)
+#
+#     def new_collection(self):
+#         name = simpledialog.askstring("New Collection", "Collection name:", parent=self)
+#         if not name:
+#             return
+#         try:
+#             self.collection_manager.create_collection(name)
+#             self.show_home()
+#         except ValueError as error:
+#             messagebox.showerror("Error", str(error))
+#
+#     def show_collection(self, collection_id=None):
+#         self.show_screen(Collection, collection_id)
+#
+#     def show_study(self, collection_id=None):
+#         self.show_screen(Study, collection_id)
 
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, simpledialog, messagebox
+from view.collection_view import Collection
+from view.study_view import Study
 
-from view.collection_view import Collection # TODO
-# from view.study_view import Study # TODO
 
 class Main(tk.Tk):
-    """TODO"""
-    def __init__(self) -> None:
+    def __init__(self, flashcard_manager=None, collection_manager=None, study_manager=None):
         super().__init__()
-
         self.title("Frankie's Notebook")
-        self.geometry("800x600")
-        self.minsize(400, 300)
-
-        # Dummy data for now TODO: replace this later
-        self.flashcards = [
-            {
-                "id": 1,
-                "word": "apple",
-                "definition": "It doesn't fall from its tree.",
-                "is_known": False,
-                "is_fav": False
-            },
-            {
-                "id": 2,
-                "word": "banana",
-                "definition": "Monkeys love this one!",
-                "is_known": False,
-                "is_fav": True
-            },
-            {
-                "id": 3,
-                "word": "Emma",
-                "definition": "She is lactose intolerant",
-                "is_known": True,
-                "is_fav": False
-            }
-        ]
-
-        self.collections = [
-            {
-                "id": 1,
-                "name": "Fruits",
-                "flashcard_ids": [1, 2]
-            },
-            {
-                "id": 2,
-                "name": "Names",
-                "flashcard_ids": [3]
-            }
-        ]
-
+        self.geometry("700x500")
+        self.flashcard_manager = flashcard_manager
+        self.collection_manager = collection_manager
+        self.study_manager = study_manager
         self.container = ttk.Frame(self, padding=20)
         self.container.pack(fill="both", expand=True)
-
         self.show_home()
 
-        # TODO: clear_screen, show_home, show_collection, show_study
-    def clear_screen(self):
+    def show_screen(self, screen, *args):
         for widget in self.container.winfo_children():
             widget.destroy()
+        screen(self.container, self, *args).pack(fill="both", expand=True)
 
     def show_home(self):
-        self.clear_screen()
+        for widget in self.container.winfo_children():
+            widget.destroy()
+        ttk.Label(self.container, text="My Library", font=("Arial", 22)).pack(pady=15)
+        ttk.Button(self.container, text="All Flashcards",
+                   command=lambda: self.show_collection(None)).pack(pady=5)
+        if self.collection_manager is not None:
+            for collection in self.collection_manager.get_all_collections():
+                ttk.Button(
+                    self.container,
+                    text=collection.name,
+                    command=lambda cid=collection.id: self.show_collection(cid)
+                ).pack(pady=5)
+        ttk.Button(self.container, text="+ New Collection",
+                   command=self.new_collection).pack(pady=15)
 
-        ttk.Label(
-            self.container,
-            text="LIBRARY",
-            font=("Comic Sans MS", 24, "bold")
-        ).pack(pady=20)
+    def new_collection(self):
+        if self.collection_manager is None:
+            messagebox.showinfo("UI Test", "Backend not connected yet.")
+            return
 
-        ttk.Button(
-            self.container,
-            text="All Flashcards",
-            command=lambda: self.show_collection(None)
-        ).pack(fill="x", pady=20)
+        name = simpledialog.askstring("New Collection", "Collection name:", parent=self)
+        if not name:
+            return
+        try:
+            self.collection_manager.create_collection(name)
+            self.show_home()
+        except ValueError as error:
+            messagebox.showerror("Error", str(error))
 
-    def show_collection(self, collection_id):
-        self.clear_screen()
+    def show_collection(self, collection_id=None):
+        if self.flashcard_manager is None or self.collection_manager is None:
+            messagebox.showinfo("UI Test", "Backend not connected yet.")
+            return
 
-        Collection(
-            self.container,
-            app=self,
-            collection_id=collection_id,
-        ).pack(fill="both", expand=True)
+        self.show_screen(Collection, collection_id)
 
-    def show_study(self):
-        self.clear_screen()
+    def show_study(self, collection_id=None):
+        if self.study_manager is None:
+            messagebox.showinfo("UI Test", "Backend not connected yet.")
+            return
 
-        Study(
-            self.container,
-            app=self,
-            collection_id=collection_id,
-        ).pack(fill="both", expand=True)
+        self.show_screen(Study, collection_id)
 
 
 if __name__ == '__main__':
@@ -105,6 +133,6 @@ if __name__ == '__main__':
     #     'max-line-length': 120
     # })
 
+    # TODO: app.run()
     app = Main()
     app.mainloop()
-    # TODO: app.run()
