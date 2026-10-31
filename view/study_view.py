@@ -39,3 +39,4 @@ class Study(ttk.Frame):
             self.app.study_manager.mark_unknown(card)
         self.index += 1
         self.show_card()
+

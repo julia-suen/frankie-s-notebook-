@@ -71,3 +71,4 @@ class Collection(ttk.Frame):
             command=add
         ).pack(pady=10)
 
+
