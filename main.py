@@ -27,7 +27,7 @@ def main():
         Collection.from_dict(collection)
 
     # Initialize managers with shared data
-    flashcard_manager = FlashcardManager(data)
+    flashcard_manager = FlashcardManager(data, storage)
     collection_manager = CollectionManager(data)
 
     
