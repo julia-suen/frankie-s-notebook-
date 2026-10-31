@@ -26,5 +26,26 @@ class FlashcardManager:
         for card in self.flashcards:
             if card.id == target_card_id:
                 card.is_fav = not card.is_fav
+
+                self.storage.save_data(self.data)
+        return
+
+    def delete_flashcard(self, target_card_id):
+        for card in self.flashcards:
+            if card.id == target_card_id:
+                self.flashcards.remove(card)
+                
+                self.storage.save_data(self.data)
+        return
+
+    def edit_flashcard(self, target_card_id, new_word=None, new_definition=None):
+        for card in self.flashcards:
+            if card.id == target_card_id:
+                if new_word is not None:
+                    card.word = new_word
+
+                if new_definition is not None:
+                    card.definition = new_definition
+
                 self.storage.save_data(self.data)
         return
