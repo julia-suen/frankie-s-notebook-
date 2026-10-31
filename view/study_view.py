@@ -2,12 +2,14 @@ from tkinter import ttk
 
 
 class Study(ttk.Frame):
-    def __init__(self, parent, app, collection_id):
+    def __init__(self, parent, app, collection_id, only_unknown=False):
         super().__init__(parent)
         self.app = app
         self.collection_id = collection_id
         cards = (app.flashcard_manager.data["flashcards"] if collection_id is None
                  else app.collection_manager.get_collection_flashcards(collection_id))
+        if only_unknown:
+            known, cards = app.study_manager.split_by_known(cards)
         self.cards = app.study_manager.create_session(cards)
         self.index = 0
         self.word = ttk.Label(self, font=("Arial", 24))
@@ -22,8 +24,10 @@ class Study(ttk.Frame):
 
     def show_card(self):
         self.definition.config(text="")
-        self.word.config(text=self.cards[self.index].word if self.index < len(self.cards)
-                         else "Finished!")
+        if self.index < len(self.cards):
+            self.word.config(text=self.cards[self.index].word)
+        else:
+            self.word.config(text="Finished!" if self.cards else "No cards to study!")
 
     def reveal(self):
         if self.index < len(self.cards):
