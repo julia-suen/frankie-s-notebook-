@@ -13,12 +13,19 @@ class Flashcard:
         self.is_known = is_known
         self.is_fav = is_fav
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "word": self.word,
+            "definition": self.definition,
+            "is_known": self.is_known,
+            "is_fav": self.is_fav,
+        }
+
     @classmethod
-    def from_dict(cls, card):
-        return cls(
-            card["id"],
-            card["word"],
-            card["definition"],
-            card["is_known"],
-            card["is_fav"]
-        )
+    def from_dict(cls, data):
+        card = cls(data["id"], data["word"], data["definition"])
+        card.is_known = data.get("is_known", False)
+        card.is_fav = data.get("is_fav", False)
+        return card
+
