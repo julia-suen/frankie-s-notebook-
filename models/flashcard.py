@@ -6,7 +6,7 @@ class Flashcard:
     is_fav: bool
  
 
-    def __init__(self, id, word, definition, is_known, is_fav):
+    def __init__(self, id, word, definition, is_known=False, is_fav=False):
         self.id = id
         self.word = word
         self.definition = definition

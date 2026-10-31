@@ -1,4 +1,3 @@
-import storage
 from models.flashcard import Flashcard
 
 class FlashcardManager:
@@ -7,6 +6,7 @@ class FlashcardManager:
 
     def __init__(self, data, storage):
         self.data = data 
+        self.storage = storage
         self.flashcards = data["flashcards"] #mutable with data in main 
         self.storage = storage 
         
@@ -26,6 +26,5 @@ class FlashcardManager:
         for card in self.flashcards:
             if card.id == target_card_id:
                 card.is_fav = not card.is_fav
-                
                 self.storage.save_data(self.data)
         return
