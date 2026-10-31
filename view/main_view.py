@@ -3,8 +3,10 @@
 import tkinter as tk
 from tkinter import ttk
 
+from view.collection_view import Collection # TODO
+from view.study_view import Study # TODO
 
-class App(tk.Tk):
+class Main(tk.Tk):
     """TODO"""
     def __init__(self) -> None:
         super().__init__()
@@ -57,22 +59,42 @@ class App(tk.Tk):
         self.show_home()
 
         # TODO: clear_screen, show_home, show_collection, show_study
-        def clear_screen(self):
-            for widget in self.container.winfo_children():
-                widget.destroy()
+    def clear_screen(self):
+        for widget in self.container.winfo_children():
+            widget.destroy()
 
-        def show_home(self):
-            # TODO
+    def show_home(self):
+        self.clear_screen()
 
-        def show_collection(self):
-            # TODO
+        ttk.Label(
+            self.container,
+            text="LIBRARY",
+            font=("Comic Sans MS", 24, "bold")
+        ).pack(pady=20)
 
-        def show_study(self):
-            # TODO
+        ttk.Button(
+            self.container,
+            text="All",
+            command=lambda: self.show_collection(None)
+        ).pack(fill="x", pady=20)
 
+    def show_collection(self):
+        self.clear_screen()
 
+        Collection(
+            self.container,
+            app=self,
+            collection_id=collection_id,
+        ).pack(fill="both", expand=True)
 
-        ttk.Label(self, text="HELLO THIS IS A TEST").pack(padx=20, pady=20) # TODO: remove this later
+    def show_study(self):
+        self.clear_screen()
+
+        Study(
+            self.container,
+            app=self,
+            collection_id=collection_id,
+        ).pack(fill="both", expand=True)
 
 
 if __name__ == '__main__':
