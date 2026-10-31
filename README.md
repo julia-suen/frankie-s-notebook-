@@ -21,3 +21,12 @@ We didn’t all know how to do UI in Python, so we learned Tkinter along the way
 
 ## What's next for Frankie’s Notebook
 We could easily extend this project to connect to a free dictionary API, which could provide additional phonetic pronunciations, example sentences, synonyms, and antonyms. This could make the learning process even more efficient. We could also build additional features such as viewing different stats, exporting and importing collections to share between users, and sound effects to enhance engagement. 
+
+## Working Demo
+Screenshots demonstrating current functionality
+<img width="960" height="725" alt="image" src="https://github.com/user-attachments/assets/05dff263-6aae-47d3-a3b4-07b43a48ad2a" />
+<img width="960" height="731" alt="image" src="https://github.com/user-attachments/assets/fab07a75-2cf4-4bd0-9907-c75032d5049d" />
+<img width="960" height="735" alt="image" src="https://github.com/user-attachments/assets/b3b8b357-bde7-4f15-b154-808589f89dd9" />
+<img width="960" height="729" alt="image" src="https://github.com/user-attachments/assets/0b87cebb-5181-41a1-b773-694097742638" />
+
+
