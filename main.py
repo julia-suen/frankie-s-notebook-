@@ -20,7 +20,8 @@ def main():
 
     # Convert raw dictionaries into Python objects
     for card in raw_data["flashcards"]:
-        Flashcard.from_dict(card)
+        flashcard = Flashcard.from_dict(card)
+        data["flashcards"].append(flashcard)
 
     for collection in raw_data["collections"]:
         Collection.from_dict(collection)

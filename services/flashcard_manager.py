@@ -1,15 +1,30 @@
 import storage
-import models.flashcard
+from models.flashcard import Flashcard
 
 class FlashcardManager:
-    flashcard: list
-    # data_handler: storage
+    flashcards: list
+    data: dict
 
-    # def __init__(self):
-    #     self.data_handler = storage()
-    #     self.flashcard = []
-    #     self.load_flashcards()
+    def __init__(self, data):
+        self.data = data 
+        self.flashcards = data["flashcards"] #mutable with data in main 
+        
+    def create_flashcard(self, word, definition):
+        # generate new ID
+        new_id = max((card.id for card in self.flashcards), default=0) + 1
 
-    # # load flashcard from scratch every time app is restarted
-    # def load_flashcards(self):
-    #     pass
+        # create new flashcard and add to shared list
+        new_flashcard = Flashcard(new_id, word, definition, False, False)
+        self.flashcards.append(new_flashcard)
+
+        #TODO: save the updated data in storage
+
+        return new_flashcard
+
+    def toggle_favourite(self, target_card_id):
+        for card in self.flashcards:
+            if card.id == target_card_id:
+                card.is_fav = not card.is_fav
+
+                # TODO: save the updated data in storage
+        return
