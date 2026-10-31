@@ -1,4 +1,4 @@
-### Frankie's Notebook
+# Frankie's Notebook
 This is a project for a beginner hack in Hack-or-Treat 2026.
 
 ## Inspiration
