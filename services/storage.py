@@ -6,7 +6,6 @@ from models.collection import Collection
 class Storage:
     def __init__(self, file_path="data/collections.json"):
         self.file_path = file_path
-        self.data = self.load_data()
     
     def load_data(self):
         try:

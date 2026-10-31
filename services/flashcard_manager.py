@@ -1,12 +1,12 @@
-import storage
 from models.flashcard import Flashcard
 
 class FlashcardManager:
     flashcards: list
     data: dict
 
-    def __init__(self, data):
+    def __init__(self, data, storage):
         self.data = data 
+        self.storage = storage
         self.flashcards = data["flashcards"] #mutable with data in main 
         
     def create_flashcard(self, word, definition):
