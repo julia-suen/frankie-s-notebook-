@@ -5,7 +5,6 @@ from services.study_manager import StudyManager
 
 
 def main():
-
     # Initialize storage
     storage = Storage("data/collections.json")
 
@@ -16,8 +15,6 @@ def main():
     flashcard_manager = FlashcardManager(data, storage)
     collection_manager = CollectionManager(data, storage)
     study_manager = StudyManager(data, storage)
-
-    
 
 
 if __name__ == "__main__":
