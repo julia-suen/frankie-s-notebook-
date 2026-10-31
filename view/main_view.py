@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from view.collection_view import Collection # TODO
-from view.study_view import Study # TODO
+# from view.study_view import Study # TODO
 
 class Main(tk.Tk):
     """TODO"""
@@ -74,11 +74,11 @@ class Main(tk.Tk):
 
         ttk.Button(
             self.container,
-            text="All",
+            text="All Flashcards",
             command=lambda: self.show_collection(None)
         ).pack(fill="x", pady=20)
 
-    def show_collection(self):
+    def show_collection(self, collection_id):
         self.clear_screen()
 
         Collection(
@@ -105,6 +105,6 @@ if __name__ == '__main__':
     #     'max-line-length': 120
     # })
 
-    app = App()
+    app = Main()
     app.mainloop()
     # TODO: app.run()
