@@ -17,7 +17,7 @@ class FlashcardManager:
         new_flashcard = Flashcard(new_id, word, definition, False, False)
         self.flashcards.append(new_flashcard)
 
-        #TODO: save the updated data in storage
+        self.storage.save_data(self.data)
 
         return new_flashcard
 
@@ -25,6 +25,5 @@ class FlashcardManager:
         for card in self.flashcards:
             if card.id == target_card_id:
                 card.is_fav = not card.is_fav
-
-                # TODO: save the updated data in storage
+                self.storage.save_data(self.data)
         return

@@ -1,9 +1,7 @@
 from services.storage import Storage
-from models import Flashcard
-from models import Collection
-from services import FlashcardManager
-from services import CollectionManager
-from services import StudyManager
+from services.flashcard_manager import FlashcardManager
+from services.collection_manager import CollectionManager
+from services.study_manager import StudyManager
 
 
 def main():

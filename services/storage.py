@@ -12,7 +12,7 @@ class Storage:
             with open(self.file_path, "r", encoding="utf-8") as file:
                 raw_data = json.load(file)
 
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
             raw_data = {}
 
         return {
