@@ -16,8 +16,6 @@ def main():
     flashcard_manager = FlashcardManager(data, storage)
     collection_manager = CollectionManager(data, storage)
     study_manager = StudyManager(data, storage)
-    app = Main(flashcard_manager, collection_manager, study_manager)
-    app.mainloop()
 
     app = Main(
         flashcard_manager,

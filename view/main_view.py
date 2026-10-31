@@ -117,12 +117,12 @@ class Main(tk.Tk):
 
         self.show_screen(Collection, collection_id)
 
-    def show_study(self, collection_id=None):
+    def show_study(self, collection_id=None, only_unknown=False):
         if self.study_manager is None:
             messagebox.showinfo("UI Test", "Backend not connected yet.")
             return
 
-        self.show_screen(Study, collection_id)
+        self.show_screen(Study, collection_id, only_unknown)
 
 
 if __name__ == '__main__':
