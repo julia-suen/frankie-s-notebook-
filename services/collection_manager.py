@@ -46,19 +46,20 @@ def add_flashcard(collection_id, flashcard_id):
 
 
 def remove_flashcard(collection_id, flashcard_id):
-    if not any(f.id == flashcard_id for f in storage.data["flashcards"]):
-        raise ValueError(f"No flashcard with id {flashcard_id}.")
     
     c = get_collection(collection_id)
     for f in range(len(c.flashcard_ids)):
         if c.flashcard_ids[f] == flashcard_id:
             del c.flashcard_ids[f]
+            break
+    storage.save_data(storage.data)
 
 
 
 def remove_flashcard_everywhere(flashcard_id):
     for c in storage.data["collections"]:
         remove_flashcard(c.id, flashcard_id)
+    storage.save_data(storage.data)
 
 
 
