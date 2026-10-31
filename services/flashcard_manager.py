@@ -8,6 +8,7 @@ class FlashcardManager:
         self.data = data 
         self.storage = storage
         self.flashcards = data["flashcards"] #mutable with data in main 
+        self.storage = storage 
         
     def create_flashcard(self, word, definition):
         # generate new ID
