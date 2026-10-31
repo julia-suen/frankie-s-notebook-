@@ -1,10 +1,4 @@
 {
-    "flashcards": [
-        {
-            "id": 1,
-            "word": "Apple",
-            "definition": "A fruit."
-        }
-    ],
-    "collection": []
+  "flashcards": [],
+  "collection": []
 }
