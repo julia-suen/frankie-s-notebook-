@@ -1,15 +1,16 @@
 from models.flashcard import Flashcard
 
+
 class FlashcardManager:
     flashcards: list
     data: dict
 
     def __init__(self, data, storage):
-        self.data = data 
+        self.data = data
         self.storage = storage
-        self.flashcards = data["flashcards"] #mutable with data in main 
-        self.storage = storage 
-        
+        self.flashcards = data["flashcards"]  # mutable with data in main
+        self.storage = storage
+
     def create_flashcard(self, word, definition):
         # generate new ID
         new_id = max((card.id for card in self.flashcards), default=0) + 1
@@ -34,7 +35,7 @@ class FlashcardManager:
         for card in self.flashcards:
             if card.id == target_card_id:
                 self.flashcards.remove(card)
-                
+
                 self.storage.save_data(self.data)
         return
 
